@@ -3,7 +3,6 @@ package main
 import (
         "encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"github.com/gorilla/mux"
@@ -83,6 +82,8 @@ func healthPost(w http.ResponseWriter, r *http.Request) {
         w.WriteHeader(http.StatusOK)
 }
 
+var heroData hero
+
 func heroGet(w http.ResponseWriter, r *http.Request) {
 	// TODO: access the global tracking to return the hero object
 	var name string
@@ -91,16 +92,20 @@ func heroGet(w http.ResponseWriter, r *http.Request) {
 		// TODO: Handle not ok
 	}
 	_ = name // TODO: something with name
-	w.WriteHeader(http.StatusNotImplemented)
+	fmt.Fprintf(w, heroData.Name);
+	w.WriteHeader(http.StatusOK)
 	return
 }
 
 func heroMake(w http.ResponseWriter, r *http.Request) {
-	// TODO : create a hero and add to some sort of global tracking
-	content, err := ioutil.ReadAll(r.Body)
-	_ = content // TODO something with the body
-	_ = err     // TODO handle read error
-	w.WriteHeader(http.StatusNotImplemented)
+        decoder := json.NewDecoder(r.Body)
+	var t hero
+	err := decoder.Decode(&t)
+	if(err != nil) {
+	       panic(err)
+	}
+	heroData = t
+	w.WriteHeader(http.StatusOK)
 	return
 }
 
