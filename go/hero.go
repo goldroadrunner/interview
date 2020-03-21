@@ -68,7 +68,11 @@ func healthGet(w http.ResponseWriter, r *http.Request) {
 }
 
 func healthPost(w http.ResponseWriter, r *http.Request) {
-	healthData = "pinged"
+        body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+	   http.Error(w, "Error reading request body", http.StatusInternalServerError)
+	}
+	healthData = string(body)
         w.WriteHeader(http.StatusOK)
 }
 
