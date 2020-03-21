@@ -61,6 +61,7 @@ type hero struct {
 
 func health(w http.ResponseWriter, r *http.Request) {
         w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "YES")
 }
 
 func heroGet(w http.ResponseWriter, r *http.Request) {
