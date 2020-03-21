@@ -59,6 +59,10 @@ type hero struct {
 
 // TODO: add more routines
 
+func health(w http.ResponseWriter, r *http.Request) {
+        w.WriteHeader(http.StatusOK)
+}
+
 func heroGet(w http.ResponseWriter, r *http.Request) {
 	// TODO: access the global tracking to return the hero object
 	var name string
@@ -81,6 +85,7 @@ func heroMake(w http.ResponseWriter, r *http.Request) {
 }
 
 func linkRoutes(r *mux.Router) {
+        r.HandleFunc("/health", health).Methods("GET")
 	r.HandleFunc("/hero", heroMake).Methods("POST")
 	r.HandleFunc("/hero/{name}", heroGet).Methods("GET")
 	// TODO: add more routes
