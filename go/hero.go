@@ -55,13 +55,16 @@ type hero struct {
 	// TODO: changeme?
 }
 
+var healthData string = "hello" ;
+
 // TODO: add storage and memory management
 
 // TODO: add more routines
 
-func health(w http.ResponseWriter, r *http.Request) {
+func healthGet(w http.ResponseWriter, r *http.Request) {
         w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "YES")
+	fmt.Fprintf(w, healthData);
 }
 
 func heroGet(w http.ResponseWriter, r *http.Request) {
@@ -86,7 +89,7 @@ func heroMake(w http.ResponseWriter, r *http.Request) {
 }
 
 func linkRoutes(r *mux.Router) {
-        r.HandleFunc("/health", health).Methods("GET")
+        r.HandleFunc("/health/check", healthGet).Methods("GET")
 	r.HandleFunc("/hero", heroMake).Methods("POST")
 	r.HandleFunc("/hero/{name}", heroGet).Methods("GET")
 	// TODO: add more routes
