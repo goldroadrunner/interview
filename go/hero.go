@@ -87,15 +87,9 @@ var heroData hero
 var heroMap = make(map[string]hero)
 
 func heroGet(w http.ResponseWriter, r *http.Request) {
-	// TODO: access the global tracking to return the hero object
-	var name string
-	var ok bool
-	if name, ok = mux.Vars(r)["name"]; !ok {
-		// TODO: Handle not ok
-	}
-	_ = name // TODO: something with name
-	fmt.Fprintf(w, heroData.Name);
-	w.WriteHeader(http.StatusOK)
+        var name = mux.Vars(r)["name"]
+	var hero = heroMap[name]
+	json.NewEncoder(w).Encode(hero)
 	return
 }
 
