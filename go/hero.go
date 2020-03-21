@@ -1,11 +1,11 @@
 package main
 
 import (
+        "encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
-
 	"github.com/gorilla/mux"
 )
 
@@ -55,7 +55,11 @@ type hero struct {
 	// TODO: changeme?
 }
 
-var healthData string = "hello" ;
+type health struct {
+     Status string
+}
+
+var healthData health
 
 // TODO: add storage and memory management
 
@@ -63,16 +67,19 @@ var healthData string = "hello" ;
 
 func healthGet(w http.ResponseWriter, r *http.Request) {
         w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "YES")
-	fmt.Fprintf(w, healthData);
+	fmt.Fprintf(w, "HELLO:  ");
+	fmt.Fprintf(w, healthData.Status);
 }
 
 func healthPost(w http.ResponseWriter, r *http.Request) {
-        body, err := ioutil.ReadAll(r.Body)
+	decoder := json.NewDecoder(r.Body)
+
+	var t health
+	err := decoder.Decode(&t)
 	if err != nil {
-	   http.Error(w, "Error reading request body", http.StatusInternalServerError)
+		panic(err)
 	}
-	healthData = string(body)
+	healthData = t
         w.WriteHeader(http.StatusOK)
 }
 
