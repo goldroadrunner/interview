@@ -14,5 +14,21 @@ curl \
 	http://127.0.0.1:8081/hero &&
     curl \
 	--request POST \
-	--data "{\"Level\": 100, \"Heros\": [ \"a\", \"b\", \"c\" ] }" \
+	--data "{\"Level\": 299, \"Heros\": [ \"a\", \"b\", \"c\" ] }" \
+	http://127.0.0.1:8081/hero/calamity &&
+    curl \
+	--request POST \
+	--data "{\"PowerLevel\": 100, \"Exhaustion\": 50, \"Name\": \"d\"}" \
+	http://127.0.0.1:8081/hero &&
+    curl \
+	--request POST \
+	--data "{\"PowerLevel\": 100, \"Exhaustion\": 50, \"Name\": \"e\"}" \
+	http://127.0.0.1:8081/hero &&
+    curl \
+	--request POST \
+	--data "{\"PowerLevel\": 100, \"Exhaustion\": 50, \"Name\": \"f\"}" \
+	http://127.0.0.1:8081/hero &&
+    curl \
+	--request POST \
+	--data "{\"Level\": 301, \"Heros\": [ \"d\", \"e\", \"f\" ] }" \
 	http://127.0.0.1:8081/hero/calamity

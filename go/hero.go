@@ -127,7 +127,14 @@ func heroCalamity(w http.ResponseWriter, r *http.Request) {
      for i:=0 ; i < len(t.Heros); i++ {
      	 sum += heroMap[t.Heros[i]].PowerLevel
      }
-     json.NewEncoder(w).Encode(sum)
+     delta := sum < t.Level
+     if(delta) {
+     	    for i:=0 ; i < len(t.Heros); i ++ {
+	    	h := heroMap[t.Heros[i]]
+		h.Exhaustion ++
+	    }
+     }
+     json.NewEncoder(w).Encode(delta)
      w.WriteHeader(http.StatusOK)
      return
 }
