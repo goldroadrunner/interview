@@ -54,6 +54,11 @@ type hero struct {
 	// TODO: changeme?
 }
 
+type calamity struct {
+       Level int
+       Heros [] string
+}
+
 type health struct {
      Status string
 }
@@ -89,8 +94,12 @@ var heroMap = make(map[string]hero)
 func heroGet(w http.ResponseWriter, r *http.Request) {
         var name = mux.Vars(r)["name"]
 	hero, present := heroMap[name]
-	json.NewEncoder(w).Encode(present)
-	_ = hero
+	if(present) {
+	       json.NewEncoder(w).Encode(hero)
+	} else {
+	       json.NewEncoder(w).Encode(present)
+	}
+	w.WriteHeader(http.StatusOK)
 	return
 }
 
@@ -107,10 +116,27 @@ func heroMake(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+func heroCalamity(w http.ResponseWriter, r *http.Request) {
+     decoder := json.NewDecoder(r.Body)
+     var t calamity
+     err := decoder.Decode(&t)
+     if(err != nil) {
+     	    panic(err)
+     }
+     var sum int
+     for i:=1 ; i <= len(t.Heros) ; i ++ {
+     	 sum += i
+     }
+     json.NewEncoder(w).Encode(sum)
+     w.WriteHeader(http.StatusOK)
+     return
+}
+
 func linkRoutes(r *mux.Router) {
         r.HandleFunc("/health/check", healthGet).Methods("GET")
 	r.HandleFunc("/health/check", healthPost).Methods("POST")
 	r.HandleFunc("/hero", heroMake).Methods("POST")
+	r.HandleFunc("/hero/calamity", heroCalamity).Methods("POST")
 	r.HandleFunc("/hero/{name}", heroGet).Methods("GET")
 	// TODO: add more routes
 }
