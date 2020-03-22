@@ -88,8 +88,9 @@ var heroMap = make(map[string]hero)
 
 func heroGet(w http.ResponseWriter, r *http.Request) {
         var name = mux.Vars(r)["name"]
-	var hero = heroMap[name]
-	json.NewEncoder(w).Encode(hero)
+	hero, present := heroMap[name]
+	json.NewEncoder(w).Encode(present)
+	_ = hero
 	return
 }
 
