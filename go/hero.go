@@ -156,6 +156,15 @@ func heroRetire(w http.ResponseWriter , r *http.Request) {
      return
 }
 
+func heroKill(w http.ResponseWriter , r *http.Request) {
+     var name = mux.Vars(r)["name"]
+     h := heroMap[name]
+     h.Exhaustion = maxExhaustion
+     heroMap[name] = h
+     w.WriteHeader(http.StatusOK)
+     return
+}
+
 func linkRoutes(r *mux.Router) {
         r.HandleFunc("/health/check", healthGet).Methods("GET")
 	r.HandleFunc("/health/check", healthPost).Methods("POST")
@@ -164,6 +173,7 @@ func linkRoutes(r *mux.Router) {
 	r.HandleFunc("/hero/{name}", heroGet).Methods("GET")
 	r.HandleFunc("/hero/rest/{name}", heroRest).Methods("POST")
 	r.HandleFunc("/hero/retire/{name}", heroRetire).Methods("POST")
+	r.HandleFunc("/hero/kill/{name}", heroKill).Methods("POST")
 	// TODO: add more routes
 }
 
