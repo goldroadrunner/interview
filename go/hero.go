@@ -129,8 +129,10 @@ func heroCalamity(w http.ResponseWriter, r *http.Request) {
      delta := sum < t.Level
      if(delta) {
      	    for i:=0 ; i < len(t.Heros); i ++ {
-	    	h := heroMap[t.Heros[i]]
+	    	k := t.Heros[i];
+	    	h := heroMap[k]
 		h.Exhaustion = h.Exhaustion + 1
+		heroMap[k] = h
 	    }
      }
      json.NewEncoder(w).Encode(delta)
