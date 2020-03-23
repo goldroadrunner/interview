@@ -99,7 +99,6 @@ func heroGet(w http.ResponseWriter, r *http.Request) {
 	} else {
 	       json.NewEncoder(w).Encode(present)
 	}
-	w.WriteHeader(http.StatusOK)
 	return
 }
 
@@ -131,11 +130,10 @@ func heroCalamity(w http.ResponseWriter, r *http.Request) {
      if(delta) {
      	    for i:=0 ; i < len(t.Heros); i ++ {
 	    	h := heroMap[t.Heros[i]]
-		h.Exhaustion ++
+		h.Exhaustion = h.Exhaustion + 1
 	    }
      }
      json.NewEncoder(w).Encode(delta)
-     w.WriteHeader(http.StatusOK)
      return
 }
 

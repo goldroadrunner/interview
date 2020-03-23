@@ -13,9 +13,15 @@ curl \
 	--data "{\"PowerLevel\": 100, \"Exhaustion\": 50, \"Name\": \"c\"}" \
 	http://127.0.0.1:8081/hero &&
     curl \
+	--request GET \
+	"http://127.0.0.1:8081/hero/a" &&
+    curl \
 	--request POST \
 	--data "{\"Level\": 299, \"Heros\": [ \"a\", \"b\", \"c\" ] }" \
 	http://127.0.0.1:8081/hero/calamity &&
+    curl \
+	--request GET \
+	"http://127.0.0.1:8081/hero/a"
     curl \
 	--request POST \
 	--data "{\"PowerLevel\": 100, \"Exhaustion\": 50, \"Name\": \"d\"}" \
