@@ -141,15 +141,10 @@ func heroCalamity(w http.ResponseWriter, r *http.Request) {
 }
 
 func heroRest(w http.ResponseWriter , r *http.Request) {
-     decoder := json.NewDecoder(r.Body)
-     var t string
-     err := decoder.Decode(&t)
-     if(err != nil) {
-     	    panic(err)
-     }
-     h := heroMap[t]
+     var name = mux.Vars(r)["name"]
+     h := heroMap[name]
      h.Exhaustion = h.Exhaustion - 1
-     heroMap[t] = h
+     heroMap[name] = h
      w.WriteHeader(http.StatusOK)
      return
 }
@@ -160,7 +155,7 @@ func linkRoutes(r *mux.Router) {
 	r.HandleFunc("/hero", heroMake).Methods("POST")
 	r.HandleFunc("/hero/calamity", heroCalamity).Methods("POST")
 	r.HandleFunc("/hero/{name}", heroGet).Methods("GET")
-	r.HandleFunc("/hero/rest", heroRest).Methods("POST")
+	r.HandleFunc("/hero/rest/{name}", heroRest).Methods("POST")
 	// TODO: add more routes
 }
 
