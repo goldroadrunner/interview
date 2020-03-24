@@ -6,5 +6,7 @@
     '' ;
     buildInputs = [
         pkgs.go
+	pkgs.nodejs
+	pkgs.vscode
     ] ;
 }

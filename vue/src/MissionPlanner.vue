@@ -1,10 +1,10 @@
 <template>
   <div>
     <!-- justice leage application begins here -->
-    <h1 id="jl">Justice League Mission Planner</h1>
+    <h1 id="jl">EMORY Justice League Mission Planner</h1>
 
     <ul class="roster">
-      <h3>Roster:</h3>
+      <h3>EMORY Roster: {message}</h3>
       <li v-for="hero in heroes"
           :key="hero.name">
 

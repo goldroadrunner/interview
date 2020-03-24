@@ -15,7 +15,7 @@
     <button @click="addHero(chosenHero)"
             :disabled="chosenHero === null">Add Hero</button>
     <br>
-    <h3>Chosen Heroes</h3>
+    <h3>EMORY Chosen Heroes</h3>
     <div class="chosen-heroes">
       <div v-for="(hero, i) in chosenHeroes"
            :key="hero.name">
