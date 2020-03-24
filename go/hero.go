@@ -95,7 +95,7 @@ var heroMap = make(map[string]hero)
 func heroGet(w http.ResponseWriter, r *http.Request) {
         var name = mux.Vars(r)["name"]
 	hero, present := heroMap[name]
-	if(present) {
+	if(present && hero.Exhaustion < maxExhaustion) {
 	       json.NewEncoder(w).Encode(hero)
 	} else {
 	       json.NewEncoder(w).Encode(present)
