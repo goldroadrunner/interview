@@ -6,7 +6,8 @@ Vue.use(Vuex)
 // root state object.
 // each Vuex instance is just a single state tree.
 const state = {
-  count: 0
+  count: 0,
+  chosenHeroList : [ ]
 }
 
 // mutations are operations that actually mutate the state.
@@ -20,6 +21,12 @@ const mutations = {
   },
   decrement (state) {
     state.count--
+  },
+  addChosenHeroToChosenHeroList (state, hero) {
+      state.chosenHeroList.push(hero)
+  },
+  removeChosenHeroFromChosenHeroList (state, hero) {
+    state.chosenHeroList = state.chosenHeroList.filter(h => h !== hero)
   }
 }
 
@@ -28,6 +35,8 @@ const mutations = {
 const actions = {
   increment: ({ commit }) => commit('increment'),
   decrement: ({ commit }) => commit('decrement'),
+  addChosenHeroToChosenHeroList: ({ commit }, hero) => commit('addChosenHeroToChosenHeroList', hero),
+  removeChosenHeroFromChosenHeroList: ({commit}, hero) => commit('removeChosenHeroFromChosenHeroList', hero),
   incrementIfOdd ({ commit, state }) {
     if ((state.count + 1) % 2 === 0) {
       commit('increment')

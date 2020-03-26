@@ -44,11 +44,13 @@ export default {
   methods: {
     addHero(name) {
       this.chosenHeroes.push({ name });
+      this.$store.dispatch('addChosenHeroToChosenHeroList', name);
       this.chosenHero = null;
     },
 
     removeHero(hero) {
       this.chosenHeroes = this.chosenHeroes.filter(h => h.name != hero.name);
+      this.$store.dispatch('removeChosenHeroFromChosenHeroList', hero.name);
     }
   }
 };
