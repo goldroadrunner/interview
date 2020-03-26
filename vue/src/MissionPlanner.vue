@@ -9,7 +9,7 @@
           :key="hero.name">
 
         <!-- to do: conditionally display this span -->
-        <span>✔ &nbsp;</span>
+        <span v-if="$store.getters.chosenHerosList.find(h => h.name === hero.name)">✔ &nbsp;</span>
 
         <span>{{ hero.name }}&nbsp;</span>
         <span class="edit"
