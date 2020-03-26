@@ -14,6 +14,7 @@
     <span>&nbsp;</span>
     <button @click="addHero(chosenHero)"
             :disabled="chosenHero === null">Add Hero</button>
+    <button @click="launchMission()">Launch Mission</button>
     <br>
     <h3>EMORY Chosen Heroes</h3>
     <div class="chosen-heroes">
@@ -48,6 +49,13 @@ export default {
     },
     removeHero(hero) {
       this.$store.dispatch('removeChosenHeroFromChosenHeroList', hero);
+    },
+    launchMission() {
+      if(this.$store.getters.chosenHerosList.length !== 3) {
+        alert("We need 3 heroes");
+      }else {
+        alert("Mission Complete");
+      }
     }
   }
 };
