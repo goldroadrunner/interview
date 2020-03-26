@@ -32,7 +32,9 @@ const mutations = {
     state.count--
   },
   addChosenHeroToChosenHeroList (state, hero) {
-      state.chosenHeroList.push(hero)
+      if(state.chosenHeroList.length < 3) {
+          state.chosenHeroList.push(hero);
+      }
   },
   removeChosenHeroFromChosenHeroList (state, hero) {
     state.chosenHeroList = state.chosenHeroList.filter(h => h !== hero)
