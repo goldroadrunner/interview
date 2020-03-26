@@ -7,7 +7,16 @@ Vue.use(Vuex)
 // each Vuex instance is just a single state tree.
 const state = {
   count: 0,
-  chosenHeroList : [ ]
+  chosenHeroList : [ ],
+  heroes: [
+    { name: "Superman" },
+    { name: "Batman" },
+    { name: "Aquaman" },
+    { name: "Wonder Woman" },
+    { name: "Green Lantern" },
+    { name: "Martian Manhunter" },
+    { name: "Flash" }
+  ]
 }
 
 // mutations are operations that actually mutate the state.
@@ -54,7 +63,8 @@ const actions = {
 
 // getters are functions.
 const getters = {
-  evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd'
+  evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd',
+  chosenHerosList: state => state.chosenHeroList,
 }
 
 // A Vuex instance is created by combining the state, mutations, actions,

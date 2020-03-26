@@ -7,7 +7,7 @@
       <!-- available heroes -->
       <option v-for="hero in heroes"
               :key="hero.name"
-              :value="hero.name">
+              :value="hero">
         {{ hero.name }}
       </option>
     </select>
@@ -17,7 +17,7 @@
     <br>
     <h3>EMORY Chosen Heroes</h3>
     <div class="chosen-heroes">
-      <div v-for="(hero, i) in chosenHeroes"
+      <div v-for="(hero, i) in $store.getters.chosenHerosList"
            :key="hero.name">
         <strong>Slot {{ i + 1 }}:</strong>
         <Hero :hero="hero"
@@ -43,14 +43,11 @@ export default {
   },
   methods: {
     addHero(name) {
-      this.chosenHeroes.push({ name });
       this.$store.dispatch('addChosenHeroToChosenHeroList', name);
       this.chosenHero = null;
     },
-
     removeHero(hero) {
-      this.chosenHeroes = this.chosenHeroes.filter(h => h.name != hero.name);
-      this.$store.dispatch('removeChosenHeroFromChosenHeroList', hero.name);
+      this.$store.dispatch('removeChosenHeroFromChosenHeroList', hero);
     }
   }
 };
