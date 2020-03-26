@@ -7,7 +7,7 @@
 
     <hr>
 
-    <h3>Problem Description</h3>
+    <h3>Problem Description {{$store.state.count}}</h3>
     <div class="description">
       <p class="text">This simple Vue.js app is broken. The app should allow the user to maintain a Justice League roster which displays a check mark next to the heroes chosen for the mission. The user should be able to build a team of at most three
         <span style="text-decoration: underline">unique</span> heroes for this mission. Adding a hero is accomplished by selecting an available hero using the drop down menu and then clicking the 'Add Hero' button. The user should be able to remove a hero from the chosen heroes list by clicking the 'x' in the top right corner of the box. Clicking the edit link next to a hero's name allows the user to change the name of that hero by typing a new name into the input box appearing below the roster and pressing enter. The input box disappears without making any changes if the element loses focus. The name change should propagate to any other mention of the hero in the app. Finally, there should be a 'Launch Mission' button next to the 'Add Hero' button that opens an alert validating the user's choice of exactly three heroes.</p>
