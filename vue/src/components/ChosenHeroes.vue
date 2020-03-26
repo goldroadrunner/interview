@@ -5,7 +5,7 @@
       <option :value="null">Select a hero</option>
 
       <!-- available heroes -->
-      <option v-for="hero in heroes"
+      <option v-for="hero in heroes.filter(h => ! $store.getters.chosenHerosList.find(hh => h.name === hh.name))"
               :key="hero.name"
               :value="hero">
         {{ hero.name }}
